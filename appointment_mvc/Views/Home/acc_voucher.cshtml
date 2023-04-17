@@ -1,0 +1,580 @@
+﻿
+@{
+    ViewBag.Title = "acc_voucher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Dosis', sans-serif;
+    }
+
+    .form-control {
+        height: 30px;
+        font-size: 13px;
+    }
+
+    body {
+        font-family: sans-serif;
+        background-image: url("../../Media/loginbg.svg");
+    }
+
+
+    .section-first {
+        padding: 0px 9px;
+        border-radius: 4px;
+        background-color: ivory;
+    }
+
+    .Vouchertype {
+        background-color: #3b71ca;
+        color: #ffffff;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .narration {
+        height: 70px;
+    }
+
+    .panel-section {
+        width: 100%;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .Acc-header {
+        background-color: #addaad;
+        color: #ffffff;
+    }
+
+    .voucher-img {
+        width: 60%;
+        border-radius: 0px !important;
+        border: .1px solid #fff;
+        height: 33px;
+    }
+
+    .bank-dtl {
+        width: 60%;
+        height: 33px;
+        border-radius: 0px !important;
+        border: .1px solid #fff;
+    }
+
+    .narr {
+        width: 100%;
+        border-radius: 0 !important;
+        margin-left: 5px;
+    }
+
+
+    .grid-panel {
+        height: 180px;
+        border: 1px solid;
+        margin: 4px 0;
+        border-radius: 4px;
+    }
+
+    .bottom-panel {
+        height: 110px;
+        padding: 10px 2px;
+        margin: 4px 0;
+        border-radius: 4px;
+        background-color: ivory;
+        -webkit-box-shadow: -1px -4px 22px -8px rgb(0 0 0 / 75%);
+        -moz-box-shadow: -1px -4px 22px -8px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 10px 4px -9px rgb(0 0 0 / 56%);
+        border-radius: 4px;
+        background-color: ivory;
+        margin: 2px 0;
+    }
+
+    .input-grid {
+        display: flex;
+    }
+
+    .input1 {
+        width: 9%;
+        border-radius: 0px !important;
+    }
+
+    .input2 {
+        width: 16.8%;
+        border-radius: 0px !important;
+    }
+
+    .input3 {
+        width: 16.8%;
+        border-radius: 0px !important;
+    }
+
+    .input4 {
+        width: 8%;
+        border-radius: 0px !important;
+    }
+
+    .input5 {
+        width: 9%;
+        border-radius: 0px !important;
+    }
+
+    .input6 {
+        width: 16%;
+        border-radius: 0px !important;
+    }
+
+    .input7 {
+        width: 17%;
+        border-radius: 0px !important;
+    }
+
+    .input8 {
+        width: 8%;
+        border-radius: 0px !important;
+    }
+
+    .btn-section {
+        width: 40.9%;
+        height: 44px;
+        display: flex;
+        background-color: #cde7cd;
+        border-radius: 100px;
+        margin-left: 10px;
+    }
+
+    .img-box {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        margin: 4px 16px;
+    }
+
+    .img-btn {
+        width: 21px;
+        height: 21px;
+    }
+
+    .img-lbl {
+        font-size: 11px;
+        font-weight: 900;
+        margin: 0;
+        padding: 0;
+    }
+
+    .vscomp-toggle-button {
+        background-color: #fff !important;
+    }
+
+    .main-section {
+        margin-top: 50px;
+    }
+
+    .small-font {
+        font-size: 11px;
+    }
+</style>
+
+
+<style>
+        body{
+            font-size:13px;
+            user-select:none;
+        }
+
+        .navbar{
+            font-size:13px;
+            font-weight:700;
+        }
+
+        .nav-link{
+            color:#000000;
+        }
+
+        .nav-link:hover{
+            color:red;
+        }
+
+        .dropdown-item:active{
+            color:cornflowerblue;
+        }
+
+        footer{
+            font-size:12px;
+            background-color:#a7e2cb;
+        }
+        .col-form-label {
+            font-weight:600;
+             padding-left:10px;
+         }
+        .cashier {
+            border: none;
+            background: none;
+            padding: 10px 10px;
+        }
+
+        @*@media screen and (max-width:480px){
+            .footer-style{
+                display:flex;
+                flex-direction:column;
+            }
+
+            .fixed-bottom{
+                display:none;
+            }
+        }
+
+        @media screen and (max-width:820px){
+            .f-branch{
+                width:36%;
+            }
+
+            .f-ip{
+                width:30%;
+            }
+
+            .f-db{
+                width:30%;
+            }
+
+            .f-cu{
+                width:35%;
+            }
+
+            .f-dt{
+                width:60%;
+            }
+        }*@
+</style>
+
+
+<div>
+
+    <div class="container-fluid main-section">
+        <div class="row section-first p-3" style="background-color: #cde7cd;">
+            <div class="col-lg-6">
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label123" class="col-lg-2 col-form-label">Voucher Type</span>
+                    <div class="col-lg-4">
+                        <span id="ContentPlaceHolder1_Voucher_type" class="form-control Vouchertype">Voucher</span>
+                    </div>
+
+                    <span id="ContentPlaceHolder1_Label1" class="col-lg-2 col-form-label">Voucher No</span>
+                    <div class="col-lg-4">
+                        <input name="ctl00$ContentPlaceHolder1$Voucher_no" type="text" id="ContentPlaceHolder1_Voucher_no" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label2" class="col-lg-2 col-form-label">Book Name</span>
+                    <div class="col-lg-4">
+                        <select id="ContentPlaceHolder1_Book_name" selectionmode="multiple" data-silent-initial-value-set="true" name="native-select" data-search="true">
+                            <option value="1">ERP CASH</option>
+                            <option value="2">ERP BANK</option>
+                        </select>
+                    </div>
+
+                    <span id="ContentPlaceHolder1_Label3" class="col-lg-2 col-form-label">Voucher Date</span>
+                    <div class="col-lg-4">
+                        <input name="ctl00$ContentPlaceHolder1$Voucher_date" type="text" id="ContentPlaceHolder1_Voucher_date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label5" class="col-lg-2 col-form-label">Cash/Bank</span>
+                    <div class="col-lg-10">
+                        <select id="ContentPlaceHolder1_CashbankAcc" selectionmode="multiple" data-silent-initial-value-set="true" name="native-select" data-search="true">
+                            <option value="1">UCO BANK</option>
+                            <option value="2">STATE BANK OF INDIA</option>
+                            <option value="3">HDFC BANK LTD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label7" class="col-lg-2 col-form-label">Ref. No.</span>
+                    <div class="col-lg-2 d-flex">
+                        <select name="ctl00$ContentPlaceHolder1$DropDownList4" id="ContentPlaceHolder1_DropDownList4" class="form-control">
+                            <option value="New Ref." CssClass="form-control">New Ref.</option>
+                            <option value="Bill Ref." CssClass="form-control">Bill Ref.</option>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <input name="ctl00$ContentPlaceHolder1$Ref_no" type="text" id="ContentPlaceHolder1_Ref_no" class="form-control" />
+                    </div>
+
+                    <span id="ContentPlaceHolder1_Label8" class="col-lg-2 col-form-label">Reco. Date</span>
+                    <div class="col-lg-3">
+                        <input name="ctl00$ContentPlaceHolder1$reco_date" type="text" id="ContentPlaceHolder1_reco_date" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label4" class="col-lg-3 col-form-label">Voucher Nature Type</span>
+                    <div class="col-lg-4">
+                        <select id="ContentPlaceHolder1_nature_type" selectionmode="multiple" data-silent-initial-value-set="true" name="native-select" data-search="true">
+                            <option value="General Receipt" CssClass="form-control">General Receipt</option>
+                            <option value="True Value Receipt" CssClass="form-control">True Value Receipt</option>
+                            <option value="Insurance Receipt" CssClass="form-control">Insurance Receipt</option>
+                            <option value="New Vehicle Receipt" CssClass="form-control">New Vehicle Receipt</option>
+                            <option value="WorkShop/BodyShop Receipt" CssClass="form-control">WorkShop/BodyShop Receipt</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label9" class="col-lg-3 col-form-label">DMS Receipt No.</span>
+                    <div class="col-lg-4">
+                        <input name="ctl00$ContentPlaceHolder1$DMS_recpt" type="text" id="ContentPlaceHolder1_DMS_recpt" class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <span id="ContentPlaceHolder1_Label6" class="col-lg-3 col-form-label">Ledg Closing Balance</span>
+                    <div class="col-lg-9">
+
+                        <textarea id="Ledg_closing_bal" cols="70" rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div id="ContentPlaceHolder1_Panel1" class="panel-section">
+
+            <div class="section-first p-3 Acc-header">
+
+
+                <div class="row">
+                    <div class="col-1">
+                        <span id="ContentPlaceHolder1_Label10" class="col-form-label">To/By</span>
+                    </div>
+
+                    <div class="col-2">
+                        <span id="ContentPlaceHolder1_Label11" class="col-form-label">Ledger Account</span>
+                    </div>
+
+                    <div class="col-2">
+                        <span id="ContentPlaceHolder1_Label12" class="col-form-label">Posting Branch</span>
+                    </div>
+
+                    <div class="col-1">
+                        <span id="ContentPlaceHolder1_Label13" class="col-form-label">Cr Amount</span>
+                    </div>
+
+                    <div class="col-1">
+                        <span id="ContentPlaceHolder1_Label14" class="col-form-label">Method of Adj.</span>
+                    </div>
+
+                    <div class="col-2">
+                        <span id="ContentPlaceHolder1_Label15" class="col-form-label">Instrument Type</span>
+                    </div>
+
+                    <div class="col-2">
+                        <span id="ContentPlaceHolder1_Label16" class="col-form-label">Instrument No</span>
+                    </div>
+
+                    <div class="col-1">
+                        <span id="ContentPlaceHolder1_Label17" class="col-form-label">Date</span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-12 input-grid">
+                    <select name="ctl00$ContentPlaceHolder1$DropDownList1" id="ContentPlaceHolder1_DropDownList1" class="form-control input1">
+                        <option value="To">To</option>
+                        <option value="BY">BY</option>
+
+                    </select>
+                    <select id="ContentPlaceHolder1_Ledg_acc" class="input2" selectionmode="multiple" data-silent-initial-value-set="true" name="native-select" data-search="true">
+                        <option value="1">ERP CASH</option>
+                        <option value="2">ERP BANK</option>
+                    </select>
+                    <select id="ContentPlaceHolder1_Post_branch" class="input3" selectionmode="multiple" data-silent-initial-value-set="true" name="native-select" data-search="true">
+                        <option value="1">MHOW SALES</option>
+                        <option value="2">BETMA - SAL</option>
+                    </select>
+                    <input name="ctl00$ContentPlaceHolder1$TextBox14" type="text" id="ContentPlaceHolder1_TextBox14" class="form-control input4" />
+                    <select name="ctl00$ContentPlaceHolder1$DropDownList2" id="ContentPlaceHolder1_DropDownList2" class="form-control input5">
+                        <option value="On Account" CssClass="form-control">On Account</option>
+                        <option value="Advanced" CssClass="form-control">Advanced</option>
+                        <option value="Bill Ref." CssClass="form-control">Bill Ref.</option>
+                        <option value="New Ref." CssClass="form-control">New Ref.</option>
+
+                    </select>
+                    <select id="ContentPlaceHolder1_Inst_type" class="input6" selectionmode="multiple" data-silent-initial-value-set="true" name="native-select" data-search="true">
+                        <option value="1">CASH</option>
+                        <option value="2">CHEQUE</option>
+                        <option value="3">CREDIT CARD</option>
+                        <option value="4">NEFT</option>
+                        <option value="5">RTGS</option>
+                        <option value="6">IMPS</option>
+                        <option value="7">DEMAND DRAFT</option>
+                        <option value="8">SWIPE</option>
+                        <option value="9">HDFC POS</option>
+                        <option value="10">SBI POS</option>
+                        <option value="11">IDBI POS</option>
+                        <option value="12">INTRA TRANSFER</option>
+                        <option value="13">INTER BANK</option>
+                        <option value="14">MOBIKWIK</option>
+                        <option value="15">UPI</option>
+                        <option value="16">PAYTM</option>
+                        <option value="17">BHARAT PAY</option>
+                        <option value="18">PETTY CASH</option>
+                        <option value="19">CREDIT CARD / DEBIT CARD</option>
+                        <option value="20">POST DATED CHEQUE</option>
+                        <option value="21">ECS</option>
+                        <option value="22">CUSTOMER CODE</option>
+
+                    </select>
+                    <input name="ctl00$ContentPlaceHolder1$Inst_no" type="text" id="ContentPlaceHolder1_Inst_no" class="form-control input7" />
+                    <input name="ctl00$ContentPlaceHolder1$date" type="text" id="ContentPlaceHolder1_date" class="form-control input8" />
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-4 d-flex">
+                    <input type="submit" name="ctl00$ContentPlaceHolder1$voucher_img" value="Voucher Image" id="ContentPlaceHolder1_voucher_img" class="btn btn-primary voucher-img" />
+                    <input type="submit" name="ctl00$ContentPlaceHolder1$bank_dtl" value="Bank Details" id="ContentPlaceHolder1_bank_dtl" class="btn btn-primary bank-dtl" />
+                </div>
+
+                <div class="col-7 d-flex">
+                    <span id="ContentPlaceHolder1_Label18" class="col-form-label" style="width:126px; text-align:end; padding-right:6px; height:33px;">Narration</span>
+                    <input name="ctl00$ContentPlaceHolder1$narr" type="text" id="ContentPlaceHolder1_narr" class="form-control narr" />
+                </div>
+
+                <div class="col-1">
+                    <span id="ContentPlaceHolder1_Label19" class="col-form-label">(Shift+Ctrl+N)</span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="ContentPlaceHolder1_Panel2" class="grid-panel">
+
+            <div>
+
+            </div>
+
+        </div>
+
+        <div id="ContentPlaceHolder1_Panel3" class="bottom-panel section-first">
+
+
+            <div class="row">
+                <div class="col-1 mt-2">
+                    <input id="ContentPlaceHolder1_CheckBox1" type="checkbox" name="ctl00$ContentPlaceHolder1$CheckBox1" />
+                    <span id="ContentPlaceHolder1_Label28" class="col-form-labe mt-2 small-font">Hypothecation</span>
+                </div>
+
+                <div class="col-2 d-flex">
+                    <span id="ContentPlaceHolder1_Label20" class="col-form-label">Bank</span>
+                    <input name="ctl00$ContentPlaceHolder1$TextBox19" type="text" id="ContentPlaceHolder1_TextBox19" class="form-control bfield" />
+                </div>
+
+                <div class="col-2 d-flex">
+                    <span id="ContentPlaceHolder1_Label21" class="col-form-label">Branch</span>
+                    <input name="ctl00$ContentPlaceHolder1$TextBox20" type="text" id="ContentPlaceHolder1_TextBox20" class="form-control bfield" />
+                </div>
+
+                <div class="col-3 mt-2">
+                    <input id="ContentPlaceHolder1_CheckBox2" type="checkbox" name="ctl00$ContentPlaceHolder1$CheckBox2" />
+                    <span id="ContentPlaceHolder1_Label22" class="col-form-labe mt-2 pe-1 small-font">Print Bill Details</span>
+
+                    <input id="ContentPlaceHolder1_CheckBox3" type="checkbox" name="ctl00$ContentPlaceHolder1$CheckBox3" />
+                    <span id="ContentPlaceHolder1_Label23" class="col-form-labe mt-2 small-font">Print Ledg Narration</span>
+                </div>
+
+                <div class="col-2 d-flex">
+                    <span id="ContentPlaceHolder1_Label26" class="col-form-label">Dr.</span>
+                    <input name="ctl00$ContentPlaceHolder1$TextBox24" type="text" id="ContentPlaceHolder1_TextBox24" class="form-control bfield" />
+                </div>
+
+                <div class="col-2 d-flex">
+                    <span id="ContentPlaceHolder1_Label27" class="col-form-label">Cr.</span>
+                    <input name="ctl00$ContentPlaceHolder1$TextBox25" type="text" id="ContentPlaceHolder1_TextBox25" class="form-control bfield" />
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-5 btn-section">
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton1" id="ContentPlaceHolder1_ImageButton1" class="img-btn" src="../../Media/Save.png" />
+                        <span id="ContentPlaceHolder1_Label24" class="col-form-label img-lbl">Save</span>
+                    </div>
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton2" id="ContentPlaceHolder1_ImageButton2" class="img-btn" src="../../Media/Update.png" />
+                        <span id="ContentPlaceHolder1_Label25" class="col-form-label img-lbl">Update</span>
+                    </div>
+
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton5" id="ContentPlaceHolder1_ImageButton5" class="img-btn" src="../../Media/Cancel.png" />
+                        <span id="ContentPlaceHolder1_Label216" class="col-form-label img-lbl">Cancel</span>
+                    </div>
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton3" id="ContentPlaceHolder1_ImageButton3" class="img-btn" src="../../Media/Reset.png" />
+                        <span id="ContentPlaceHolder1_Label271" class="col-form-label img-lbl">Reset</span>
+                    </div>
+
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton4" id="ContentPlaceHolder1_ImageButton4" class="img-btn" src="../../Media/Delete.png" />
+                        <span id="ContentPlaceHolder1_Label2731" class="col-form-label img-lbl">Delete</span>
+                    </div>
+
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton6" id="ContentPlaceHolder1_ImageButton6" class="img-btn" src="../../Media/Exit.png" />
+                        <span id="ContentPlaceHolder1_Label2741" class="col-form-label img-lbl">Exit</span>
+                    </div>
+
+                    <div class="img-box">
+                        <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton7" id="ContentPlaceHolder1_ImageButton7" class="img-btn" src="../../Media/Print.png" />
+                        <span id="ContentPlaceHolder1_Label27451" class="col-form-label img-lbl">Print</span>
+                    </div>
+                </div>
+
+                <div class="col-7">
+                    <textarea id="TextArea1" cols="83" rows="2" class="form-control"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    setInterval(myTimer, 1000);
+
+    function myTimer() {
+        const d = new Date();
+        document.getElementById("Curr_Time").innerHTML = d.toLocaleTimeString();
+    }
+</script>
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+

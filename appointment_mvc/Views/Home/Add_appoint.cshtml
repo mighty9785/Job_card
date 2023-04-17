@@ -1,0 +1,274 @@
+﻿
+@model appointment_mvc.Models.appointment
+
+@{
+    ViewBag.Title = "Add_appoint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <style>
+        
+        form {
+            overflow: hidden;
+        }
+
+        .sub-head {
+            font-size: 24px;
+            color: black;
+            font-weight: bold;
+        }
+
+        .candidate_info {
+            box-shadow: 0px 0px 17px -2px rgba(0,0,0,0.55);
+            background: #cde7cd;
+            border-radius: 8px;
+        }
+
+        .btn {
+            background-color: #529352e3;
+            border: none;
+            padding: 2px;
+        }
+
+            .btn:hover {
+                background-color: #7bad7be3;
+            }
+        .navbar{
+           /* display:none;*/
+        }
+
+
+
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .styled-table thead tr {
+                background-color: #009879;
+                color: #ffffff;
+                text-align: left;
+            }
+
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
+
+            .styled-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid #009879;
+                }
+
+                .styled-table tbody tr.active-row {
+                    font-weight: bold;
+                    color: #009879;
+                }
+
+        table {
+            width: 100%;
+            margin-left: -50px;
+        }
+
+        .container-fluid {
+          
+            margin-top: 95px !important;
+        }
+
+
+    </style>
+
+
+    <div class="container-fluid" style="margin-top:40px;">
+        <div class="section-first candidate_info mb-2 mt-2 pt-1 p-3 ">
+            <!-- row -->
+            <div class="row text-center mb-1">
+                <div class="col">
+                    <Label ID="Label141" class="col-form-labe sub-head" style="margin-bottom:20px;">Appointement  Details</Label>
+                </div>
+            </div>
+            <!-- row -->
+            <!-- row -->
+            @using (Html.BeginForm("insert_appoint", "home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row mb-1">
+
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label110" class="col col-form-label">S.NO.</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="S_no" class="" value="@Model.S_no">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label1" class="col col-form-label">Reg. No.</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="Reg_no" class="" value="@Model.Reg_no">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-2 ">
+                        <div class="row mb-1">
+                            <Label ID="Label2" class="col col-form-label">Chas. No.</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="Chas_no" class="" value="@Model.Chas_no">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label3" class="col col-form-label">Model</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="model" class="" value="@Model.model">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-2 ">
+                        <div class="row mb-1">
+                            <Label ID="Label4" class="col col-form-label">Customer Name</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="customer_name" class="" value="@Model.customer_name">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label5" class="col col-form-label">Phone</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="phone" class="" value="@Model.phone">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label6" class="col col-form-label">Visit Date</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="visit_date" class="" value="@Model.visit_date">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label7" class="col col-form-label">Time</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="time" class="" value="@Model.visit_date">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label8" class="col col-form-label">Complaint</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <input type="text" name="complaint" class="" value="@Model.complaint">
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column -->
+                    <div class="col-md-1 ">
+                        <div class="row mb-1">
+                            <Label ID="Label9" class="col col-form-label">Add Detail</Label>
+                        </div>
+                        <div class="row mb-1">
+                            <Button type="submit" class="btn col-md-6 btn-dark" style="margin-left: 12px;">Add</Button>
+
+                            <input type="hidden" id="id" name="id" value="@Model.id" />
+                        </div>
+                    </div>
+                    <!-- column -->
+                
+                </div>
+            }
+            
+              
+
+
+                <div class="" >
+                    <table class="styled-table" style="table-layout:fixed; width:100%;" id="table">
+                        <thead>
+                            <tr>
+                                <th>S.NO</th>
+                                <th>Reg.No.</th>
+                                <th>Chas No.</th>
+                                <th>Model</th>
+                                <th>Customer Name</th>
+                                <th>Phone</th>
+                                <th>Visit Date</th>
+                                <th>Time</th>
+                                <th>Complaint</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.appointment_list != null && Model.appointment_list.Count > 0)
+                            {
+                                foreach (var item in Model.appointment_list)
+                                {
+
+                                    <tr>
+                                        <td>@item.S_no</td>
+                                        <td>@item.Reg_no</td>
+                                        <td>@item.Chas_no</td>
+                                        <td>@item.model</td>
+                                        <td>@item.customer_name</td>
+                                        <td>@item.phone</td>
+                                        <td>@item.visit_date</td>
+                                        <td>@item.time</td>
+                                        <td>@item.complaint</td>
+
+                                        <td>
+                                            <a href="/home/Add_appoint?id=@(item.id)">Edit</a>
+                                            <a href="/home/delet_appoint?id=@(item.Chas_no)">delete</a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+    </div>
+
+
+
+
+
+

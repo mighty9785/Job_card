@@ -1,0 +1,2121 @@
+﻿
+@model appointment_mvc.Models.job_card
+
+@{
+    ViewBag.Title = "job_card";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<style>
+
+    .main-head {
+        font-size: 23px;
+        font-weight: 900;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .sub-head {
+        font-size: 18px;
+        font-weight: 700;
+        color: rgb(0, 104, 64);
+    }
+
+
+    .section-header {
+        padding: 4px 9px;
+        -webkit-box-shadow: -1px -4px 22px -8px rgb(0 0 0 / 75%);
+        -moz-box-shadow: -1px -4px 22px -8px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 10px 4px -9px rgb(0 0 0 / 56%);
+        border-radius: 4px;
+        background-color: #a7e2cb;
+    }
+
+    .section-first {
+        padding: 14px 9px;
+        -webkit-box-shadow: -1px -4px 22px -8px rgb(0 0 0 / 75%);
+        -moz-box-shadow: -1px -4px 22px -8px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 10px 4px -9px rgb(0 0 0 / 56%);
+        border-radius: 4px;
+        background-color: #a7e2cb;
+        margin: 10px 0;
+    }
+
+    .section-box {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .input-box-section {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+    }
+
+    .lbl {
+        display: inline-block;
+        width: 100% !important;
+    }
+
+    /* using for log input section */
+    .long-input {
+        width: 330%;
+    }
+
+
+
+
+    /* using for log input section */
+
+
+    .part_data,
+    .file_upload {
+        background-color: #13936d;
+        color: #ffffff;
+        letter-spacing: 2px;
+    }
+
+
+    .dropify {
+        width: 130px;
+    }
+
+    .dropify-wrapper {
+        height: 130px !important;
+        width: 140px !important;
+    }
+
+    .Complain_sec {
+        margin: 12px 0;
+    }
+
+
+    .img-box {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        margin: 14px 10px;
+    }
+
+    .img-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .img-lbl {
+        font-size: 11px;
+        font-weight: 900;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-section {
+        margin-top: 50px;
+    }
+
+    .styled-table {
+        border-collapse: collapse;
+        margin: 1px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 2px 4px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+            .styled-table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+
+            .styled-table tbody tr:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
+
+            .styled-table tbody tr.active-row {
+                font-weight: bold;
+                color: #009879;
+            }
+
+    table {
+        width: 100%;
+        margin-left: -50px;
+    }
+
+    .container-fluid {
+        margin-top: 95px !important;
+    }
+
+    .detail_box {
+        width: 48%;
+        margin: 8px;
+    }
+
+    .autocompletelist, .chas_list, .model_list {
+        text-decoration: none;
+        background-color: #dfdfdf;
+        list-style: none;
+        position: absolute;
+        z-index: 2;
+        width: 35.8%;
+        overflow-y: scroll;
+        height: auto;
+        max-height: 259px;
+    }
+
+    .chas_list, .model_list {
+        width: 14.8%;
+        margin-top: 37px;
+        margin-left: 130px;
+    }
+
+        .autocompletelist li:hover, .chas_list li:hover, .model_list li:hover {
+            cursor: pointer;
+            background-color: darkgray;
+        }
+
+        .autocompletelist li, .chas_list li, .model_list li {
+            margin-left: -29px;
+        }
+
+    .req_star {
+        color: red;
+    }
+
+    #reg_no, #chass_No {
+        text-transform: uppercase;
+    }
+    /*  #mobile_f:required:focus {
+        border: 1px solid red;
+        outline: none;
+    }*/
+    .vall, .lab_vall {
+        margin-bottom: 0rem !important;
+    }
+</style>
+
+
+<div class="container-fluid main-section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="section-first">
+                <div class="col-lg-2 m-auto">
+                    <label class="main-head">Jobcard Details</label>
+                </div>
+
+                <!--header section row -->
+                <div class="row mb-1 section-box">
+                    <div class="col-lg-6 d-flex">
+                        <div class="col-lg-3">
+                            <label class=" lbl">Jobcard No.<label class="req_star">*</label></label>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="text" name="jobcard_no" class="form-control " id="job_card" value="@Model.jobcard_no">
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="" class="btn btn-success " id="view">View</a>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="col-lg-3 input-box-section">
+                        <div class="lbl">
+                            <label class="col-lg-2 lbl">Cust_name<label class="req_star">*</label></label>
+                        </div>
+                        <input type="text" name="cust_name" class="form-control" id="cust_name" value="@Model.cust_name">
+                    </div>
+
+                    <div class="col-lg-3 input-box-section">
+                        <div class="lbl">
+                            <label class="col-lg-2 lbl">Date<label class="req_star">*</label></label>
+                        </div>
+                        <input type="text" id="date" class="form-control" value="@Model.date" required>
+                    </div>
+
+                </div>
+                <!--header section row -->
+                <!--header section row -->
+                <div class="row mb-1 section-box">
+                    
+
+                    <div class="col-lg-6 d-flex">
+                        <div class="col-lg-3">
+                            <label class=" lbl">Address<label class="req_star">*</label></label> 
+                        </div>
+                        <div class="col-lg-9">
+                            <input type="text" id="address" class="form-control" value="@Model.address">
+                        </div>
+                        
+
+                    </div>
+
+                    <div class="col-lg-3 input-box-section">
+                        <div class="lbl">
+                            <label class="col-lg-2 lbl">Mobile_no 1<label class="req_star">*</label></label>
+                        </div>
+
+                        <input type="text" class="form-control" id="mobile_f" onkeypress="return IsNumerica(event);" maxlength="10" value="@Model.mobile_f" /><br />
+
+                    </div>
+
+                    <script type="text/javascript">
+                        var specialKeys = new Array();
+                        specialKeys.push(8);
+                        function IsNumerica(e) {
+                            var keyCode = e.which ? e.which : e.keyCode
+                            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+
+                            document.getElementById("mobile_f").style.border = ret ? "none" : "2px solid red";
+
+                            return ret;
+                        }
+                    </script>
+
+
+                    <div class="col-lg-3 input-box-section">
+                        <div class="lbl">
+                            <label class="col-lg-2 lbl">Mobile_no 2</label>
+                        </div>
+                        <input type="text" maxlength="10" id="mobile_2" onkeypress="return IsNumericb(event);" class="form-control" value="@Model.mobile_2">
+
+                    </div>
+                    <script type="text/javascript">
+                        var specialKeys = new Array();
+                        specialKeys.push(8);
+                        function IsNumericb(e) {
+                            var keyCode = e.which ? e.which : e.keyCode
+                            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+
+                            document.getElementById("mobile_2").style.border = ret ? "none" : "2px solid red";
+                            return ret;
+                        }
+                    </script>
+
+                </div>
+                <!--header section row -->
+            </div>
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-fill mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="ex2-tab-1" data-mdb-toggle="pill" href="#ex2-pills-1" role="tab"
+                       aria-controls="ex2-pills-1" aria-selected="true">Job Card Details</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex2-tab-2" data-mdb-toggle="pill" href="#ex2-pills-2" role="tab"
+                       aria-controls="ex2-pills-2" aria-selected="false">Vehicle Checklist</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex2-tab-3" data-mdb-toggle="pill" href="#ex2-pills-3" role="tab"
+                       aria-controls="ex2-pills-3" aria-selected="false">Labour/part Details</a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex2-tab-4" data-mdb-toggle="pill" href="#ex2-pills-4" role="tab"
+                       aria-controls="ex2-pills-4" aria-selected="false">Image Upload</a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex2-tab-5" data-mdb-toggle="pill" href="#ex2-pills-5" role="tab"
+                       aria-controls="ex2-pills-5" aria-selected="false">Cumtomer Complaints</a>
+                </li>
+            </ul>
+            <!-- Pills navs -->
+
+            <div class="row">
+                <div class="col-lg-11">
+                    <!-- Pills content -->
+                    <div class="tab-content" id="ex2-content">
+                        <div class="tab-pane fade show active" id="ex2-pills-1" role="tabpanel"
+                             aria-labelledby="ex2-tab-1">
+                            <div class="section-first">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="sub-head">Vehicle Details</label>
+                                    </div>
+                                </div>
+                                <!--tab-1 section row -->
+                                <div class="row mb-1 section-box">
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Reg No.<label class="req_star">*</label></label>
+                                        </div>
+                                        <input type="text" id="reg_no" class="form-control" onkeypress="return IsNumericreg(event);" required value="@Model.reg_no">
+                                    </div>
+                                    <script type="text/javascript">
+
+                                        var specialKeys = new Array();
+                                        specialKeys.push(8);
+                                        function IsNumericreg(e) {
+                                            var k = e.which ? e.which : e.keyCode
+                                            var ret = ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+
+                                            document.getElementById("reg_no").style.border = ret ? "none" : "2px solid red";
+                                            return ret;
+                                        }
+                                    </script>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Chass. No.<label class="req_star">*</label></label>
+                                        </div>
+                                        <input type="text" id="chass_No" onkeypress="return IsNumericahss(event);" required class="form-control " value="@Model.chass_No">
+                                        <input type="hidden" name="" class="col-lg-4 form-control" id="hid_chas">
+                                        <ul class="chas_list col-lg-4" id="chas_botl"></ul>
+                                    </div>
+                                    <script type="text/javascript">
+
+                                        var specialKeys = new Array();
+                                        specialKeys.push(8);
+                                        function IsNumericahss(e) {
+                                            var k = e.which ? e.which : e.keyCode
+                                            var ret = ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+
+                                            document.getElementById("chass_No").style.border = ret ? "none" : "2px solid red";
+                                            return ret;
+                                        }
+                                    </script>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Srv. Type</label>
+                                        </div>
+                                        <select id="service_type" class="form-control">
+                                            <option value="">--Select--</option>
+                                            @if (Model.serv_type != null && Model.serv_type.Count > 0)
+                                            {
+                                                foreach (var item in Model.serv_type)
+                                                {
+
+                                                    <option value="@item.type_code">@item.ser_type</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Srv. Adviser</label>
+                                        </div>
+                                        <select id="service_adviser" class="form-control">
+                                            <option value="">--Select--</option>
+                                            @if (Model.serv_adv != null && Model.serv_adv.Count > 0)
+                                            {
+                                                foreach (var item in Model.serv_adv)
+                                                {
+                                                    <option value="@item.adv_code">@item.ser_adv</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--tab-1 section row -->
+                                <!--tab-1 section row -->
+                                <div class="row mb-1 section-box">
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">KMS</label>
+                                        </div>
+                                        <input type="text" id="kms" onkeypress="return IsNumerickms(event);" class="form-control" value="@Model.kms">
+                                        <script type="text/javascript">
+                                            var specialKeys = new Array();
+                                            specialKeys.push(8);
+                                            function IsNumerickms(e) {
+                                                var keyCode = e.which ? e.which : e.keyCode
+                                                var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+
+                                                document.getElementById("kms").style.border = ret ? "none" : "2px solid red";
+                                                return ret;
+                                            }
+                                        </script>
+                                    </div>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Average</label>
+                                        </div>
+                                        <input type="text" id="avrage" onkeypress="return IsNumericavg(event);" class="form-control" value="@Model.avrage">
+                                        <script type="text/javascript">
+                                            var specialKeys = new Array();
+                                            specialKeys.push(8);
+                                            function IsNumericavg(e) {
+                                                var keyCode = e.which ? e.which : e.keyCode
+                                                var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+
+                                                document.getElementById("avrage").style.border = ret ? "none" : "2px solid red";
+                                                return ret;
+                                            }
+                                        </script>
+                                    </div>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Model</label>
+                                        </div>
+                                        <input type="text" id="modl" class="form-control" value="@Model.modl_code">
+                                        <input type="hidden" name="" class="col-lg-4 form-control" id="hid_model">
+                                        <input type="hidden" name="" class="col-lg-4 form-control" id="hid_model_id">
+                                        <ul class="model_list col-lg-4">
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Engine No</label>
+                                        </div>
+                                        <input type="text" id="engine" class="form-control" value="@Model.eng_no">
+                                    </div>
+                                </div>
+                                <!--tab-1 section row -->
+                            </div>
+
+                            <div class="section-first">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="sub-head">Bill Details</label>
+                                    </div>
+                                </div>
+                                <!--tab-1 section row -->
+                                <div class="row mb-1 section-box">
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Parts Amt</label>
+                                        </div>
+                                        <input type="text" id="parts_amt" class="form-control" value="@Model.parts_amt" readonly>
+                                    </div>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Labour Charge</label>
+                                        </div>
+                                        <input type="text" id="labour_charg" class="form-control" value="@Model.labour_charg" readonly>
+                                    </div>
+
+                                    <div class="col-lg-3 input-box-section">
+                                        <div class="lbl">
+                                            <label class="col-lg-2 lbl">Total</label>
+                                        </div>
+                                        <input type="text" id="total" class="form-control" value="@Model.total" readonly>
+                                    </div>
+
+                                </div>
+
+
+                                <!--tab-1 section row -->
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="ex2-pills-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="section-first">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label class="sub-head">Vehicle Check List</label>
+                                            </div>
+                                        </div>
+                                        <!--tab-1 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Service Book</label>
+                                                </div>
+                                                <select id="seervice_book" class="form-control" @(Model.seervice_book != "" ? "data-select=" + Model.seervice_book + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Wheel</label>
+                                                </div>
+                                                <select id="wheel" class="form-control" @(Model.wheel != "" ? "data-select=" + Model.wheel + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Extend Warr.</label>
+                                                </div>
+                                                <select id="extend_warrnt" class="form-control" @(Model.extend_warrnt != "" ? "data-select=" + Model.extend_warrnt + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <!--tab-2 section row -->
+                                        <!--tab-2 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Toolkit</label>
+                                                </div>
+                                                <select id="toolkit" class="form-control" @(Model.toolkit != "" ? "data-select=" + Model.toolkit + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Mud Flaps</label>
+                                                </div>
+                                                <select id="mudflaps" class="form-control" @(Model.mudflaps != "" ? "data-select=" + Model.mudflaps + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">fuel</label>
+                                                </div>
+                                                <select id="fule" class="form-control" @(Model.fule != "" ? "data-select=" + Model.fule + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--tab-2 section row -->
+                                        <!--tab-2 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">jack</label>
+                                                </div>
+                                                <select id="jack" class="form-control" @(Model.jack != "" ? "data-select=" + Model.jack + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Boot Mats</label>
+                                                </div>
+                                                <select id="boot_mats" class="form-control" @(Model.boot_mats != "" ? "data-select=" + Model.boot_mats + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Dent</label>
+                                                </div>
+                                                <select id="Dent" class="form-control" @(Model.Dent != "" ? "data-select=" + Model.Dent + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--tab-2 section row -->
+                                        <!--tab-2 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">jack Handl</label>
+                                                </div>
+                                                <select id="jack_handle" class="form-control" @(Model.jack_handle != "" ? "data-select=" + Model.jack_handle + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Lighter</label>
+                                                </div>
+                                                <select id="Lighter" class="form-control" @(Model.Lighter != "" ? "data-select=" + Model.Lighter + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Crack</label>
+                                                </div>
+                                                <select id="Crack" class="form-control" @(Model.Crack != "" ? "data-select=" + Model.Crack + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--tab-2 section row -->
+                                        <!--tab-2 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Stereo</label>
+                                                </div>
+                                                <select id="Stereo" class="form-control" @(Model.Stereo != "" ? "data-select=" + Model.Stereo + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-4 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Tyres</label>
+                                                </div>
+                                                <select id="Tyres" class="form-control" @(Model.Tyres != "" ? "data-select=" + Model.Tyres + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <!--tab-2 section row -->
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="section-first">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label class="sub-head">Vehicle Check List</label>
+                                            </div>
+                                        </div>
+
+                                        <!--tab-2 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-9 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">peel</label>
+                                                </div>
+                                                <select id="Peel" class="form-control" @(Model.Peel != "" ? "data-select=" + Model.Peel + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-9 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">CD Player</label>
+                                                </div>
+                                                <select id="cd_player" class="form-control" @(Model.cd_player != "" ? "data-select=" + Model.cd_player + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--tab-2 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-9 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Battery</label>
+                                                </div>
+                                                <select id="battery" class="form-control" @(Model.battery != "" ? "data-select=" + Model.battery + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-9 input-box-section">
+                                                <div class="lbl">
+                                                    <label class="col-lg-2 lbl">Scratch</label>
+                                                </div>
+                                                <select id="scratch" class="form-control" @(Model.scratch != "" ? "data-select=" + Model.scratch + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--tab-2 section row -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="ex2-pills-3" role="tabpanel" aria-labelledby="ex2-tab-3">
+
+                            <div class="row">
+                                <div class="section-first p-1  col-sm-6 detail_box">
+                                    <div class="row mb-1 ">
+
+                                        <div class="col-md-2">
+                                            <label class="lbl">Part No.</label>
+                                        </div>
+
+                                        <div class="col-md-4" id="bind">
+                                            <input type="text" name="part_no" class="col-lg-4 form-control" id="txtdepartureairport">
+                                            <input type="hidden" name="" class="col-lg-4 form-control" id="hid_item">
+                                            <ul class="autocompletelist"></ul>
+
+                                        </div>
+
+
+
+
+                                        <div class="col-md-2">
+                                            <label class="lbl">Part Desc.</label>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <input type="text" name="part_desc" class="col-lg-4 form-control" id="part_name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-1 ">
+                                        <div class="col-md-2">
+                                            <label class="lbl">QTY</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="qty" id="qty" onkeyup="multiply()" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label class="lbl">Part Rate</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="part_rate" id="unit_rate" onkeyup="multiply()" class="form-control">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row mb-1 ">
+                                        <div class="col-md-2">
+                                            <label class="lbl">Total Amt</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="total_amt" id="total_amt" readonly="readonly" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6 ">
+                                            <a id="part_data" class="btn btn-success" onclick="addData()">ADD</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="section-first  col-sm-6 detail_box">
+                                    <div class="row mb-1 ">
+                                        <div class="col-md-2">
+
+                                            <label class="lbl">Labour NO.</label>
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <input type="text" name="part_no" class="form-control" id="labr_no">
+                                        </div>
+
+                                        <div class="col-md-2">
+
+                                            <label class="lbl">Lab. Name</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="part_no" class="form-control" id="labr_name">
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mb-1">
+                                        <div class="col-md-2 ">
+                                            <label class="lbl">Lab. Chrg</label>
+                                        </div>
+                                        <div class="col-md-4 ">
+
+                                            <input type="text" name="part_rate" class="form-control" id="labr_charge">
+                                        </div>
+
+                                        <div class="col-md-4 ">
+                                            <a id="part_data" class="btn part_data" onclick="addlabr_Data()">Add</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="section-first p-1  col-sm-6 detail_box">
+                                    <table class="styled-table" style="table-layout:fixed;" id="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Part Code</th>
+                                                <th>Part Name</th>
+                                                <th>QTY</th>
+                                                <th>Part Rate</th>
+                                                <th>Total Amt</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="table_body">
+                                            @if (Model.item_list != null && Model.item_list.Count > 0)
+                                            {
+                                                foreach (var item in Model.item_list)
+                                                {
+
+                                                    <tr>
+
+                                                        <td>@item.item_code</td>
+                                                        <td>@item.part_desc</td>
+                                                        <td>@item.qty</td>
+                                                        <td>@item.per_rate</td>
+                                                        <td>@item.total_amt</td>
+
+                                                        <td>
+                                                            <a href="/home/Add_appoint?part_no">Delete</a>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <p id="vall"></p>
+                                </div>
+
+                                <div class="section-first p-1  col-sm-6 detail_box">
+                                    <table class="styled-table" style="table-layout:fixed;" id="labr_table">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Labour NO</th>
+                                                <th>Labour Name</th>
+                                                <th>Labour Charge</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="labr_tablebody">
+                                            @if (Model.labr_list != null && Model.labr_list.Count > 0)
+                                            {
+                                                foreach (var item in Model.labr_list)
+                                                {
+
+                                                    <tr>
+
+                                                        <td>@item.labr_no</td>
+                                                        <td>@item.labr_name</td>
+                                                        <td>@item.labr_charg</td>
+                                                        <td>
+                                                            <a href="/home/Add_appoint?part_no">Delete</a>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <p id="lab_vall"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="ex2-pills-4" role="tabpanel" aria-labelledby="ex2-tab-4">
+                            <div class="section-first">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="sub-head">Vehicle Details</label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-1 section-box">
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload1" type="file" class="dropify" data-default-file="/tempimage/@Model.img1" />
+                                            <input type="hidden" id="img1" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload2" type="file" class="dropify" data-default-file="/tempimage/@Model.img2" />
+                                            <input type="hidden" id="img2" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload3" type="file" class="dropify" data-default-file="/tempimage/@Model.img3" />
+                                            <input type="hidden" id="img3" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload4" type="file" class="dropify" data-default-file="/tempimage/@Model.img4" />
+                                            <input type="hidden" id="img4" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload5" type="file" class="dropify" data-default-file="/tempimage/@Model.img5" />
+                                            <input type="hidden" id="img5" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload6" type="file" class="dropify" data-default-file="/tempimage/@Model.img6" />
+                                            <input type="hidden" id="img6" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-1 section-box">
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload7" type="file" class="dropify" data-default-file="/tempimage/@Model.img7" />
+                                            <input type="hidden" id="img7" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload8" type="file" class="dropify" data-default-file="/tempimage/@Model.img8" />
+                                            <input type="hidden" id="img8" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload9" type="file" class="dropify" data-default-file="/tempimage/@Model.img9" />
+                                            <input type="hidden" id="img9" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload10" type="file" class="dropify" data-default-file="/tempimage/@Model.img10" />
+                                            <input type="hidden" id="img10" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload11" type="file" class="dropify" data-default-file="/tempimage/@Model.img11" />
+                                            <input type="hidden" id="img11" />
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-2 input-box-section">
+                                        <label>
+                                            Upload Image
+                                            <input id="fileupload12" type="file" class="dropify" data-default-file="/tempimage/@Model.img12" />
+                                            <input type="hidden" id="img12" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="ex2-pills-5" role="tabpanel" aria-labelledby="ex2-tab-5">
+                            <div class="section-first">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <!--tab-1 section row -->
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <label class="col-lg-12 sub-head">Customer Complaint</label>
+
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp1" class="form-control" value="@Model.cust_comp1">
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp2" class="form-control" value="@Model.cust_comp2">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp3" class="form-control" value="@Model.cust_comp3">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp4" class="form-control" value="@Model.cust_comp4">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp5" class="form-control" value="@Model.cust_comp5">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp6" class="form-control" value="@Model.cust_comp6">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp7" class="form-control" value="@Model.cust_comp7">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+
+                                                <input type="text" id="cust_comp8" class="form-control" value="@Model.cust_comp8">
+
+                                            </div>
+                                        </div>
+                                        <!--tab-1 section row -->
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <label class="col-lg-12 sub-head">Adviser Observation</label>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr1" class="form-control" value="@Model.Cust_Obsr1">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr2" class="form-control" value="@Model.Cust_Obsr2">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr3" class="form-control" value="@Model.Cust_Obsr3">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr4" class="form-control" value="@Model.Cust_Obsr4">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr5" class="form-control" value="@Model.Cust_Obsr5">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr6" class="form-control" value="@Model.Cust_Obsr6">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr7" class="form-control" value="@Model.Cust_Obsr7">
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <input type="text" id="Cust_Obsr8" class="form-control" value="@Model.Cust_Obsr8">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="row mb-1 section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <label class="col-lg-2 sub-head">Source</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source1" class="form-control" @(Model.source1 != "" ? "data-select=" + Model.source1 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source2" class="form-control" @(Model.source2 != "" ? "data-select=" + Model.source2 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="0">Attended</option>
+                                                    <option value="1">Coustomer Refused</option>
+                                                    <option value="2">Part Not Available</option>
+                                                    <OPtion value="3">manpower Shortage </OPtion>
+                                                    <option value="4">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source3" class="form-control" @(Model.source3 != "" ? "data-select=" + Model.source3 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source4" class="form-control" @(Model.source4 != "" ? "data-select=" + Model.source4 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source5" class="form-control" @(Model.source5 != "" ? "data-select=" + Model.source5 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source6" class="form-control" @(Model.source6 != "" ? "data-select=" + Model.source6 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source7" class="form-control" @(Model.source7 != "" ? "data-select=" + Model.source7 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row section-box">
+                                            <div class="col-lg-12 input-box-section">
+                                                <select id="source8" class="form-control" @(Model.source8 != "" ? "data-select=" + Model.source8 + "" : "")>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Attended</option>
+                                                    <option value="2">Coustomer Refused</option>
+                                                    <option value="3">Part Not Available</option>
+                                                    <OPtion value="4">manpower Shortage </OPtion>
+                                                    <option value="5">Facility not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-1"
+                     style="background-color: #a7e2cb; border-radius:20px; width: 7.333% !important;">
+                    <div class="img-box">
+                        <button type="submit" id="jobcard_save"><img src="~/Media/Save.png" alt="save" /></button>
+                        <Label id="lable" CssClass="col-form-label img-lbl">Save</Label>
+
+                    </div>
+
+                    <div class="img-box">
+                        <a href="/home/job_card" id="save"><img src="~/Media/Update.png" alt="update" /></a>
+                        <Label id="lable" CssClass="col-form-label img-lbl">Reset</Label>
+                    </div>
+
+                    <div class="img-box">
+                        <a href="" id="save"><img src="~/Media/Cancel.png" alt="cancel" /></a>
+                        <Label id="lable" CssClass="col-form-label img-lbl">Cancel</Label>
+                    </div>
+
+                    <div class="img-box">
+                        <a href="" id="print"><img src="~/Media/Print.png" alt="cancel" /></a>
+                        <Label id="lable" CssClass="col-form-label img-lbl">Print</Label>
+                    </div>
+                </div>
+                <!-- Pills content -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+<script>
+    var date = document.getElementById('date');
+
+    function checkValue(str, max) {
+        if (str.charAt(0) !== '0' || str == '00') {
+            var num = parseInt(str);
+            if (isNaN(num) || num <= 0 || num > max) num = 1;
+            str = num > parseInt(max.toString().charAt(0)) && num.toString().length == 1 ? '0' + num : num.toString();
+        };
+        return str;
+    };
+
+    date.addEventListener('input', function (e) {
+        this.type = 'text';
+        var input = this.value;
+        if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
+        var values = input.split('/').map(function (v) {
+            return v.replace(/\D/g, '')
+        });
+        if (values[0]) values[0] = checkValue(values[0], 31);
+        if (values[1]) values[1] = checkValue(values[1], 12);
+        if (values[2]) values[2] = checkValue(values[2], 99);
+        var output = values.map(function (v, i) {
+            return v.length == 2 && i < 2 ? v + '/' : v;
+        });
+        this.value = output.join('').substr(0, 14);
+    });
+
+    date.addEventListener('blur', function (e) {
+        this.type = 'text';
+        var input = this.value;
+        var values = input.split('/').map(function (v, i) {
+            return v.replace(/\D/g, '')
+        });
+        var output = '';
+
+        if (values.length == 3) {
+            var year = values[2].length !== 4 ? parseInt(values[2]) + 2000 : parseInt(values[2]);
+            var month = parseInt(values[1]) - 1;
+            var day = parseInt(values[0]);
+            var d = new Date(year, month, day);
+            if (!isNaN(d)) {
+                document.getElementById('result').innerText = d.toString();
+                var dates = [d.getMonth() + 1, d.getDate(), d.getFullYear()];
+                output = dates.map(function (v) {
+                    v = v.toString();
+                    return v.length == 1 ? '0' + v : v;
+                }).join('/');
+            };
+        };
+        this.value = output;
+    });
+
+</script>
+
+
+<script>
+    $('#mobile_f').on("blur", function () {
+        var mobile_f = $("#mobile_f").val().trim();
+        if (mobile_f == null || mobile_f == "" || mobile_f.length < 10) {
+
+            $("#mobile_f").focus().css('border','2px solid red');
+            return false;
+        }
+
+        
+    });
+    $('#mobile_2').on("blur", function () {
+        var mobile_2 = $("#mobile_2").val().trim();
+        if (mobile_2.length < 10 && mobile_2.length >= 1) {
+
+            $("#mobile_2").focus().css('border', '2px solid red');
+            return false;
+        }
+
+
+    });
+</script>
+
+<script>
+    $('.dropify').dropify();
+
+    $("[data-select]").each(function () {
+        var obj = $(this);
+        obj.val(obj.attr("data-select"))
+    });
+</script>
+
+
+<script>
+
+
+    $('#view').on("click", function () {
+        var job_id = $('#job_card').val();
+
+        $('#view').attr('href', '/home/job_card?job_id=' + job_id);
+    });
+
+    $('#print').on("click", function () {
+        var job_id = $('#job_card').val();
+
+        $('#print').attr('href', '/home/print_card?job_id=' + job_id);
+    });
+
+</script>
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    function multiply() {
+        var a = $("#qty").val();
+        var b = $("#unit_rate").val();
+        var c = a * b;
+        $("#total_amt").val(c);
+    }
+
+</script>
+
+<script>
+
+    function addData() {
+
+
+
+        var part_no = document.getElementById("hid_item").value;
+        var part_name = document.getElementById("part_name").value;
+        var qty = document.getElementById("qty").value;
+        var per_rate = document.getElementById("unit_rate").value;
+        var total = document.getElementById("total_amt").value;
+
+
+
+
+        var table = document.getElementById("table_body");
+        var row = table.insertRow();
+        var part_noCell = row.insertCell(0);
+        var part_nameCell = row.insertCell(1);
+        var qtyCell = row.insertCell(2);
+        var per_rateCell = row.insertCell(3);
+        var totalCell = row.insertCell(4);
+        var deleteCell = row.insertCell(5);
+
+
+        part_noCell.innerHTML = part_no;
+        part_nameCell.innerHTML = part_name;
+        qtyCell.innerHTML = qty;
+        per_rateCell.innerHTML = per_rate;
+        totalCell.innerHTML = total;
+        deleteCell.innerHTML = "<button href='' onclick='deleteRow(this)' id='del'>Delete</button>";
+
+        var sumVal = 0;
+
+        $('#table_body tr').each(function (row, tr) {
+            sumVal += parseInt($(tr).find('td:eq(4)').text());
+        });
+
+        $('#vall').html("Sum Value = " + sumVal);
+        $('#parts_amt').val(sumVal);
+
+    }
+
+    function deleteRow(row) {
+        var i = row.parentNode.parentNode.rowIndex;
+        document.getElementById("table").deleteRow(i);
+
+        var sumVal = 0;
+
+        $('#table_body tr').each(function (row, tr) {
+            sumVal += parseInt($(tr).find('td:eq(4)').text());
+        });
+
+        $('#vall').html("Sum Value = " + sumVal);
+        $('#parts_amt').val(sumVal);
+    }
+
+
+</script>
+
+<script>
+
+    function addlabr_Data() {
+        var labr_no = document.getElementById("labr_no").value;
+        var labr_name = document.getElementById("labr_name").value;
+        var labr_charge = document.getElementById("labr_charge").value;
+
+
+        var table = document.getElementById("labr_tablebody");
+        var row = table.insertRow();
+        var labr_noCell = row.insertCell(0);
+        var labr_nameCell = row.insertCell(1);
+        var labr_chargeCell = row.insertCell(2);
+        var lab_deleteCell = row.insertCell(3);
+
+
+        labr_noCell.innerHTML = labr_no;
+        labr_nameCell.innerHTML = labr_name;
+        labr_chargeCell.innerHTML = labr_charge;
+        lab_deleteCell.innerHTML = "<button href='' onclick='deletelab_Row(this)'>Delete</button>";
+
+        var sumVal = 0;
+
+        $('#labr_tablebody tr').each(function (row, tr) {
+            sumVal += parseInt($(tr).find('td:eq(2)').text());
+        });
+
+        $('#lab_vall').html("Sum Value = " + sumVal);
+        $('#labour_charg').val(sumVal);
+    }
+    function deletelab_Row(row) {
+        var i = row.parentNode.parentNode.rowIndex;
+        document.getElementById("labr_table").deleteRow(i);
+
+        var sumVal = 0;
+
+        $('#labr_tablebody tr').each(function (row, tr) {
+            sumVal += parseInt($(tr).find('td:eq(2)').text());
+        });
+
+        $('#lab_vall').html("Sum Value = " + sumVal);
+        $('#labour_charg').val(sumVal);
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#ex2-tab-1").click(function () {
+            var aa = parseInt($("#labour_charg").val());
+            var bb = parseInt($("#parts_amt").val());
+            console.log(aa);
+            if (aa == null || aa == "" || aa == NaN) {
+                aa = 0;
+            }
+            console.log(aa);
+            if (bb == null || bb == "" || aa == "NaN") {
+                bb = 0;
+            }
+            console.log(bb);
+            var tt = aa + bb;
+            $('#total').val(tt);
+            console.log(tt);
+        });
+    });
+</script>
+
+<script>
+    (function ($) {
+        $.fn.extend({
+            donetyping: function (callback, timeout) {
+                timeout = timeout || 500; // 1 second default timeout
+                var timeoutReference,
+                    doneTyping = function (el) {
+                        if (!timeoutReference) return;
+                        timeoutReference = null;
+                        callback.call(el);
+                    };
+                return this.each(function (i, el) {
+                    var $el = $(el);
+                    // Chrome Fix (Use keyup over keypress to detect backspace)
+
+                    $el.is(':input') && $el.on('keyup keydown keypress paste', function (e) {
+                        // This catches the backspace button in chrome, but also prevents
+                        // the event from triggering too preemptively. Without this line,
+                        // using tab/shift+tab will make the focused element fire the callback.
+                        if (e.type == 'keyup' && e.keyCode != 8) return;
+
+                        // Check if timeout has been set. If it has, "reset" the clock and
+                        // start over again.
+                        if (timeoutReference) clearTimeout(timeoutReference);
+                        timeoutReference = setTimeout(function () {
+                            // if we made it here, our timeout has elapsed. Fire the
+                            // callback
+                            doneTyping(el);
+                        }, timeout);
+                    }).on('blur', function () {
+                        // If we can, fire the event since we're leaving the field
+                        doneTyping(el);
+                    });
+                });
+            }
+        });
+    })(jQuery);
+</script>
+
+<script>
+    $("#txtdepartureairport").donetyping(function () {
+        var value = $(this).val();
+        if (value.length == 0) {
+            $(".autocompletelist").css('display', 'none')
+        }
+
+        else if (value.length > 2) {
+            $.ajax({
+
+                url: "/home/airportsearch",
+                async: true,
+                data: "{ 'search': '" + value + "'}",
+                type: 'POST',
+                headers: { "Accept": "application/json" },
+                contentType: 'application/json',
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    if (data.length > 0) {
+                        $(".autocompletelist").css('display', 'block')
+                        var html = "";
+                        var firsthtmlairportcode = "";
+                        $.each(data, function (i, val) {
+
+                            firsthtmlairportcode = firsthtmlairportcode + "<li data-id='" + val.item_code + "' part-name='" + val.part_name + "' rate='" + val.per_rate + "' part-no='" + val.part_no + "'>" + val.part_no + " | " + val.part_name + " </li>";
+                        });
+
+                        $("#bind .autocompletelist").html(firsthtmlairportcode + html)
+                    } else {
+                        $(".autocompletelist").css('display', 'none')
+
+                    }
+                },
+
+                complete: function () {
+
+
+                }
+
+            });
+        } else {
+            $(".autocompletelistcity").hide();
+        }
+    })
+</script>
+
+<script>
+    $("#chass_No").donetyping(function () {
+        var value = $(this).val();
+        if (value.length == 0) {
+            $(".chas_list").css('display', 'none')
+        }
+
+        else if (value.length > 0) {
+            $.ajax({
+
+                url: "/home/chas_search",
+                async: true,
+                data: "{ 'search': '" + value + "'}",
+                type: 'POST',
+                headers: { "Accept": "application/json" },
+                contentType: 'application/json',
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                    if (data.length > 0) {
+                        $(".chas_list").css('display', 'block')
+                        var html = "";
+                        var firsthtmlairportcode = "";
+                        $.each(data, function (i, val) {
+
+                            firsthtmlairportcode = firsthtmlairportcode + "<li data-id='" + val.chas_id + "'  data-no='" + val.chas_no + "' reg_no='" + val.reg_no + "' eng_no='" + val.eng_no + "' modl_id='" + val.modl_id + "'>" + val.chas_no + " </li>";
+                        });
+
+                        $(".chas_list").html(firsthtmlairportcode + html)
+                    } else {
+                        $(".chas_list").css('display', 'none')
+
+                    }
+                },
+
+                complete: function () {
+
+
+                }
+
+            });
+        } else {
+            $(".autocompletelistcity").hide();
+        }
+    })
+</script>
+
+@*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>*@
+
+<script>
+    $("#modl").donetyping(function () {
+        var value = $(this).val();
+        if (value.length == 0) {
+            $(".model_list").css('display', 'none')
+        }
+
+        else if (value.length > 0) {
+                $.ajax({
+
+                    url: "/home/model_search",
+                    async: true,
+                    data: "{ 'search': '" + value + "'}",
+                    type: 'POST',
+                    headers: { "Accept": "application/json" },
+                    contentType: 'application/json',
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        if (data.length > 0) {
+                            $(".model_list").css('display', 'block')
+                            var html = "";
+                            var firsthtmlairportcode = "";
+                            $.each(data, function (i, val) {
+
+                                firsthtmlairportcode += ("<li data-id='" + val.model_no + "'  data-no='" + val.model_name + "' modl_id='" + val.model_id + "' >" + val.model_name + " </li>");
+                            });
+
+                            //$("#model_listt").autocomplete({
+                            //    source: firsthtmlairportcode
+                            //});
+                            $(".model_list").html(firsthtmlairportcode + html)
+                        } else {
+                            $(".model_list").css('display', 'none')
+
+                        }
+                    },
+
+                    complete: function () {
+
+
+                    }
+
+                });
+            
+           
+        }
+
+        else {
+            $(".autocompletelistcity").hide();
+        }
+    })
+</script>
+
+
+
+
+<script>
+    $(document).on('click', '.autocompletelist li', function () {
+        var item_code = $(this).attr("data-id"); // Get the text content of the clicked <li> element
+        var part_no = $(this).attr("part-no"); // Get the text content of the clicked <li> element
+        var part_name = $(this).attr("part-name"); // Get the text content of the clicked <li> element
+        var part_rate = $(this).attr("rate"); // Get the text content of the clicked <li> element
+        $('#txtdepartureairport').val(part_no); // Set the input value to the selected value
+        $('#part_name').val(part_name); // Set the input value to the selected value
+        $('#unit_rate').val(part_rate); // Set the input value to the selected value
+        $('#hid_item').val(item_code); // Set the input value to the selected value
+        $(".autocompletelist").css('display', 'none')
+        $('.autocompletelist').empty(); // Clear the <ul> list
+    });
+
+    $(document).on('click', '.chas_list li', function () {
+        var value = $(this).attr("data-id");
+        var modl = $(this).attr("modl_id");
+        $.ajax({
+
+            url: "/home/inv_search",
+            async: true,
+            data: "{ 'search': '" + value + "', 'modl': '" + modl + "'}",
+            type: 'POST',
+            headers: { "Accept": "application/json" },
+            processData: false,
+            beforeSend: function () {
+            },
+            contentType: 'application/json',
+            success: function (data, textStatus, xhr) {
+                console.log(data);
+
+                $('#cust_name').val(data.Ledg_Name);
+                $('#mobile_f').val(data.ph1);
+                $('#mobile_2').val(data.ph2);
+                $('#address').val(data.Ledg_Add1);
+                $('#modl').val(data.modl_name);
+
+            },
+
+            complete: function () {
+
+
+            }
+
+        });
+
+        var part_no = $(this).attr("data-no");
+        var item_code = $(this).attr("data-id");
+        var reg_no = $(this).attr("reg_no");
+        var modl_id = $(this).attr("modl_id");
+        var eng_no = $(this).attr("eng_no");
+
+        $('#chass_No').val(part_no); // Set the input value to the selected value
+        $('#hid_chas').val(item_code); // Set the input value to the selected value
+        $('#hid_model').val(modl_id); // Set the input value to the selected value
+        $('#reg_no').val(reg_no); // Set the input value to the selected value
+        $('#engine').val(eng_no); // Set the input value to the selected value
+        $(".chas_list").css('display', 'none')
+        $('.chas_list').empty(); // Clear the <ul> list
+    });
+
+    $(document).on('click', '.model_list li', function () {
+
+        var part_no = $(this).attr("data-no");
+        var item_code = $(this).attr("data-id");
+        var modl_id = $(this).attr("modl_id");
+
+        $('#modl').val(part_no); // Set the input value to the selected value
+        $('#hid_model').val(item_code); // Set the input value to the selected value
+        $('#hid_model_id').val(modl_id); // Set the input value to the selected value
+        $(".model_list").css('display', 'none')
+        $('.model_list').empty(); // Clear the <ul> list
+    });
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        // Add event listener to the submit button
+        $("#jobcard_save").click(function () {
+
+
+            var job_card = $("#job_card").val().trim();
+            if (job_card == null || job_card == "") {
+                alert("Please Select Job_card No. Here!");
+                $("#job_card").focus();
+                return false;
+            }
+
+            var cust_name = $("#cust_name").val().trim();
+            if (cust_name == null || cust_name == "") {
+                alert("Please Enter Customer Name Here!");
+                $("#cust_name").focus();
+                return false;
+            }
+
+            var mobile_f = $("#mobile_f").val().trim();
+            if (mobile_f == null || mobile_f == "") {
+                alert("Please Enter Mobile No. Here!");
+                $("#mobile_f").focus();
+                return false;
+            }
+
+
+            if (mobile_f.length < 10) {
+                alert("Please Enter Valid Mobile No. Here!");
+                $("#mobile_f").focus();
+                return false;
+            }
+
+            var mobile = $("#mobile_2").val().trim();
+            if (mobile != null || mobile != "") {
+                if (mobile.length < 10) {
+                    alert("Please Enter33s Valid Mobile No. Here!");
+                    $("#mobile_2").focus();
+                    return false;
+                }
+            }
+
+            var address = $("#address").val().trim();
+            if (address == null || address == "") {
+                alert("Please Enter Address Here!");
+                $("#address").focus();
+                return false;
+            }
+
+            var formdata = new FormData();
+
+            formdata.append("jobcard_no", $('#job_card').val());
+            formdata.append("cust_name", $('#cust_name').val());
+            formdata.append("mobile_f", $('#mobile_f').val());
+            formdata.append("mobile_2", $('#mobile_2').val());
+            formdata.append("address", $('#address').val());
+            formdata.append("date", $('#date').val());
+            formdata.append("reg_no", $('#reg_no').val());
+            formdata.append("chass_No", $('#chass_No').val());
+            formdata.append("service_type", $('#service_type').val());
+            formdata.append("service_adviser", $('#service_adviser').val());
+            formdata.append("kms", $('#kms').val());
+            formdata.append("avrage", $('#avrage').val());
+            formdata.append("modl_code", $('#hid_model_id').val());
+            formdata.append("eng_no", $('#engine').val());
+            formdata.append("parts_amt", $('#parts_amt').val());
+            formdata.append("labour_charg", $('#labour_charg').val());
+            formdata.append("total", $('#total').val());
+            formdata.append("seervice_book", $('#seervice_book').val());
+            formdata.append("wheel", $('#wheel').val());
+            formdata.append("extend_warrnt", $('#extend_warrnt').val());
+            formdata.append("toolkit", $('#toolkit').val());
+            formdata.append("mudflaps", $('#mudflaps').val());
+            formdata.append("fule", $('#fule').val());
+            formdata.append("jack", $('#jack').val());
+            formdata.append("boot_mats", $('#boot_mats').val());
+            formdata.append("Dent", $('#Dent').val());
+            formdata.append("jack_handle", $('#jack_handle').val());
+            formdata.append("Lighter", $('#Lighter').val());
+            formdata.append("Crack", $('#Crack').val());
+            formdata.append("Stereo", $('#Stereo').val());
+            formdata.append("Tyres", $('#Tyres').val());
+            formdata.append("Peel", $('#Peel').val());
+            formdata.append("cd_player", $('#cd_player').val());
+            formdata.append("battery", $('#battery').val());
+            formdata.append("scratch", $('#scratch').val());
+            formdata.append("part_no", $('#part_no').val());
+            formdata.append("part_desc", $('#part_desc').val());
+            formdata.append("qty", $('#qty').val());
+            formdata.append("part_rate", $('#part_rate').val());
+            formdata.append("part_amt", $('#part_amt').val());
+            formdata.append("total_amt", $('#total_amt').val());
+            formdata.append("labr_no", $('#labr_no').val());
+            formdata.append("labr_name", $('#labr_name').val());
+            formdata.append("labr_charg", $('#labr_charg').val());
+
+
+            var files1 = $("#fileupload1").get(0).files;
+            var files2 = $("#fileupload2").get(0).files;
+            var files3 = $("#fileupload3").get(0).files;
+            var files4 = $("#fileupload4").get(0).files;
+            var files5 = $("#fileupload5").get(0).files;
+            var files6 = $("#fileupload6").get(0).files;
+            var files7 = $("#fileupload7").get(0).files;
+            var files8 = $("#fileupload8").get(0).files;
+            var files9 = $("#fileupload9").get(0).files;
+            var files10 = $("#fileupload10").get(0).files;
+            var files11 = $("#fileupload11").get(0).files;
+            var files12 = $("#fileupload12").get(0).files;
+
+
+
+            formdata.append("fileupload1", files1[0]);
+            formdata.append("fileupload2", files2[0]);
+            formdata.append("fileupload3", files3[0]);
+            formdata.append("fileupload4", files4[0]);
+            formdata.append("fileupload5", files5[0]);
+            formdata.append("fileupload6", files6[0]);
+            formdata.append("fileupload7", files7[0]);
+            formdata.append("fileupload8", files8[0]);
+            formdata.append("fileupload9", files9[0]);
+            formdata.append("fileupload10", files10[0]);
+            formdata.append("fileupload11", files11[0]);
+            formdata.append("fileupload12", files12[0]);
+            formdata.append("img1", $('#img1').val());
+            formdata.append("img2", $('#img2').val());
+            formdata.append("img3", $('#img3').val());
+            formdata.append("img4", $('#img4').val());
+            formdata.append("img5", $('#img5').val());
+            formdata.append("img6", $('#img6').val());
+            formdata.append("img7", $('#img7').val());
+            formdata.append("img8", $('#img8').val());
+            formdata.append("img9", $('#img9').val());
+            formdata.append("img10", $('#img10').val());
+            formdata.append("img11", $('#img11').val());
+            formdata.append("img12", $('#img12').val());
+            formdata.append("cust_comp1", $('#cust_comp1').val());
+            formdata.append("cust_comp2", $('#cust_comp2').val());
+            formdata.append("cust_comp3", $('#cust_comp3').val());
+            formdata.append("cust_comp4", $('#cust_comp4').val());
+            formdata.append("cust_comp5", $('#cust_comp5').val());
+            formdata.append("cust_comp6", $('#cust_comp6').val());
+            formdata.append("cust_comp7", $('#cust_comp7').val());
+            formdata.append("cust_comp8", $('#cust_comp8').val());
+            formdata.append("Cust_Obsr1", $('#Cust_Obsr1').val());
+            formdata.append("Cust_Obsr2", $('#Cust_Obsr2').val());
+            formdata.append("Cust_Obsr3", $('#Cust_Obsr3').val());
+            formdata.append("Cust_Obsr4", $('#Cust_Obsr4').val());
+            formdata.append("Cust_Obsr5", $('#Cust_Obsr5').val());
+            formdata.append("Cust_Obsr6", $('#Cust_Obsr6').val());
+            formdata.append("Cust_Obsr7", $('#Cust_Obsr7').val());
+            formdata.append("Cust_Obsr8", $('#Cust_Obsr8').val());
+            formdata.append("source1", $('#source1').val());
+            formdata.append("source2", $('#source2').val());
+            formdata.append("source3", $('#source3').val());
+            formdata.append("source4", $('#source4').val());
+            formdata.append("source5", $('#source5').val());
+            formdata.append("source6", $('#source6').val());
+            formdata.append("source7", $('#source7').val());
+            formdata.append("source8", $('#source8').val());
+
+            // Get the table data
+            var table = document.getElementById('table_body');
+            var tableData = [];
+
+            // Loop through each row in the table (skipping the first row which contains headers)
+            for (var i = 0; i < table.rows.length; i++) {
+                var row = table.rows[i];
+                var rowData = {
+                    part_no: row.cells[0].innerText,
+                    part_name: row.cells[1].innerText,
+                    qty: row.cells[2].innerText,
+                    per_rate: row.cells[3].innerText,
+                    total: row.cells[4].innerText
+                };
+                tableData.push(rowData);
+            }
+
+            var labr_table = document.getElementById('labr_tablebody');
+            var labr_tableData = [];
+
+            // Loop through each row in the table (skipping the first row which contains headers)
+            for (var j = 0; j < labr_table.rows.length; j++) {
+                var row1 = labr_table.rows[j];
+                var rowData1 = {
+                    labr_no: row1.cells[0].innerText,
+                    labr_name: row1.cells[1].innerText,
+                    labr_charge: row1.cells[2].innerText
+                };
+                labr_tableData.push(rowData1);
+            }
+
+
+            formdata.append('tabledata', JSON.stringify(tableData));
+            formdata.append('labr_tabledata', JSON.stringify(labr_tableData));
+
+            $.ajax({
+                type: "POST",
+                url: "/home/insert_jobcard",
+                data: formdata,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data != null && data.success == true) {
+
+
+                        Swal.fire({
+                            icon: 'success',
+                            html: '<p style="font-size: 17px;">' + data.message + '</p>',
+                            returnFocus: true,
+                            returnFocus: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                                window.location.href = '/home/job_card';
+                            }
+                        });
+
+                    }
+                    else {
+
+                        Swal.fire({
+                            icon: 'error',
+                            html: '<p style="font-size: 17px;">' + data.message + '</p>',
+                            returnFocus: true,
+                            returnFocus: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                                return false;
+                            }
+                        });
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+
+
+</script>
